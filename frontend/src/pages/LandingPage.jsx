@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import Header from '../components/layout/Header';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import DiversityThreeIcon from '@mui/icons-material/DiversityThree';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 import WorkIcon from '@mui/icons-material/Work';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -184,7 +184,7 @@ const LandingPage = () => {
             <Grid item xs={12} md={4}>
               <Card className="feature-card">
                 <CardContent>
-                  <DiversityThreeIcon color="primary" className="feature-icon" />
+                  <Diversity3Icon color="primary" className="feature-icon" />
                   <Typography variant="h6" component="h3" gutterBottom>
                     Inclusive Culture
                   </Typography>

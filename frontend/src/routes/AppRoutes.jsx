@@ -6,6 +6,8 @@ import ProtectedRoute from '../components/auth/ProtectedRoute';
 import DashboardLayout from '../layouts/DashboardLayout';
 import DashboardPage from '../pages/admin/DashboardPage';
 import CandidatesPage from '../pages/admin/CandidatesPage';
+import AdministratorsPage from '../pages/admin/AdministratorsPage';
+import UserCreationPage from '../pages/admin/UserCreationPage';
 import LandingPage from '../pages/LandingPage';
 import { useAuth } from '../context/AuthContext';
 
@@ -53,6 +55,8 @@ const AppRoutes = () => {
       >
         <Route index element={<DashboardPage />} />
         <Route path="candidates" element={<CandidatesPage />} />
+        <Route path="administrators" element={<AdministratorsPage />} />
+        <Route path="user-creation" element={<UserCreationPage />} />
         <Route path="profile" element={<ProfilePage />} />
       </Route>
 

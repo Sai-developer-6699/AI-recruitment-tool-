@@ -20,6 +20,8 @@ import Header from '../components/layout/Header';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import MenuIcon from '@mui/icons-material/Menu';
 
 // Import CSS
@@ -48,6 +50,16 @@ const DashboardLayout = () => {
       text: 'Candidates',
       icon: <PeopleIcon />,
       path: '/admin-dashboard/candidates',
+    },
+    {
+      text: 'Administrators',
+      icon: <AdminPanelSettingsIcon />,
+      path: '/admin-dashboard/administrators',
+    },
+    {
+      text: 'Create User',
+      icon: <PersonAddIcon />,
+      path: '/admin-dashboard/user-creation',
     },
     {
       text: 'Profile',
