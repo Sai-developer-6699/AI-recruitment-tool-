@@ -1,0 +1,66 @@
+/* DashboardLayout.css */
+
+.dashboard-container {
+  display: flex;
+}
+
+.mobile-menu-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1300;
+}
+
+.nav-container {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) { /* md breakpoint */
+  .nav-container {
+    width: auto;
+  }
+}
+
+.mobile-drawer {
+  display: block;
+}
+
+.drawer-paper {
+  box-sizing: border-box;
+  width: 240px;
+}
+
+.desktop-drawer {
+  display: none;
+}
+
+@media (min-width: 900px) { /* md breakpoint */
+  .mobile-drawer {
+    display: none;
+  }
+  
+  .desktop-drawer {
+    display: block;
+  }
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 24px;
+  width: calc(100% - 240px);
+  margin-top: 64px; /* Account for header height */
+}
+
+@media (max-width: 900px) { /* md breakpoint */
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 900px) { /* md breakpoint */
+  .main-content {
+    margin-left: 240px;
+  }
+}

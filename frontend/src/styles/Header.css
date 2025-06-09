@@ -1,0 +1,16 @@
+/* Header.css */
+
+.header-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-title {
+  flex-grow: 1;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #1976d2; /* primary.main */
+}
