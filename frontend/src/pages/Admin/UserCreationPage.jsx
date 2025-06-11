@@ -44,13 +44,13 @@ const UserCreationPage = () => {
       try {
         if (mode === 'create') {
           // Create new user
-          const response = await UserService.createUser({
-            name: values.name,
-            email: values.email,
-            department: values.department,
-            designation: values.designation,
-            phone: values.phone,
-          });
+          // const userCreate = await UserService.createUser({
+          //   name: values.name,
+          //   email: values.email,
+          //   department: values.department,
+          //   designation: values.designation,
+          //   phone: values.phone,
+          // });
           setNotification({
             open: true,
             message: 'User created successfully!',
@@ -60,7 +60,7 @@ const UserCreationPage = () => {
           formik.resetForm();
         } else {
           // Update existing user
-          const response = await UserService.updateUser(values.userId, {
+          const updateUser = await UserService.updateUser(values.userId, {
             name: values.name,
             email: values.email,
             department: values.department,

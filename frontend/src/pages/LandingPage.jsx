@@ -15,6 +15,7 @@ import {
   Card,
   CardContent,
   IconButton,
+  Link,
 } from '@mui/material';
 import Header from '../components/layout/Header';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
@@ -43,15 +44,9 @@ const LandingPage = () => {
     }),
     onSubmit: async (values) => {
       try {
-        // For demo purposes, hardcoded admin login
         if (values.email === 'admin' && values.password === 'admin') {
-          // Create a mock token with admin role
           const mockToken = 'mock-jwt-token-for-admin';
-          
-          // Use the login function from AuthContext
           login(mockToken);
-          
-          // Navigate to admin dashboard
           navigate('/admin-dashboard');
         } else {
           setError('Invalid username or password');
@@ -65,191 +60,179 @@ const LandingPage = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* Header */}
       <Header />
-
-      {/* Main content */}
-      <Container maxWidth="lg" className="main-container">
-        <Grid container spacing={4}>
-          {/* Left side - Company info */}
-          <Grid item xs={12} md={7}>
-            <Box className="company-info-container">
-              <Box className="company-info-overlay" />
-              <Box className="company-info-content">
-                <Typography variant="h2" component="h1" gutterBottom>
-                  Join Our Team
-                </Typography>
-                <Typography variant="h5" paragraph>
-                  Safe Software and Integrated Solutions Pvt. Ltd. is a leading provider of innovative software solutions. We are always looking for talented individuals to join our team. Upload your resume to be considered for current and future opportunities.
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  size="large" 
-                  color="primary"
-                  id="upload"
-                  className="upload-button"
-                >
-                  Upload Resume
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-
-          {/* Right side - Login form */}
-          <Grid item xs={12} md={5}>
-            <Paper
-              elevation={3}
-              className="login-paper"
-            >
-              <Typography component="h1" variant="h5" className="login-title">
-                AI Recruitment Tool
-              </Typography>
-              <Typography component="h2" variant="h6" className="login-subtitle">
-                Sign in
-              </Typography>
-              {error && (
-                <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
-                  {error}
-                </Alert>
-              )}
-              <Box
-                component="form"
-                onSubmit={formik.handleSubmit}
-                className="login-form"
-              >
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Username"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  error={formik.touched.password && Boolean(formik.errors.password)}
-                  helperText={formik.touched.password && formik.errors.password}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  className="login-button"
-                >
-                  Sign In
-                </Button>
-              </Box>
-            </Paper>
-          </Grid>
-        </Grid>
-
-        {/* Why Join Us Section */}
-        <Box className="why-join-section" id="about">
-          <Typography variant="h3" component="h2" gutterBottom>
-            Why Join Us?
-          </Typography>
-          <Typography variant="body1" paragraph>
-            At Safe Software and Integrated Solutions Pvt. Ltd., we foster a collaborative and innovative environment where employees can thrive and make a real impact.
-          </Typography>
-          
-          <Grid container spacing={4} sx={{ mt: 2 }}>
-            <Grid item xs={12} md={4}>
-              <Card className="feature-card">
-                <CardContent>
-                  <BusinessCenterIcon color="primary" className="feature-icon" />
-                  <Typography variant="h6" component="h3" gutterBottom>
-                    Career Growth
+      <main>
+        {/* Hero Section */}
+        <Box className="hero-section">
+          <Container maxWidth="lg">
+            <Grid container spacing={4} alignItems="center">
+              <Grid item xs={12} md={7}>
+                <Box className="hero-content">
+                  <Typography variant="h2" component="h1" gutterBottom>
+                    Welcome to Safe Software
                   </Typography>
-                  <Typography variant="body2">
-                    We offer ample opportunities for professional development and career advancement.
+                  <Typography variant="h5" component="p" sx={{ mb: 3 }}>
+                    Pioneering IT & ELV Solutions Since 2005
                   </Typography>
-                </CardContent>
-              </Card>
+                  <Typography variant="body1" paragraph>
+                    As a leading system integrator in India, we deliver comprehensive, high-quality solutions in Information Technology (IT) and Extra Low Voltage (ELV) systems. Join our team and contribute to our mission of providing innovative, cost-effective solutions for our clients.
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <Paper component="aside" elevation={6} className="login-paper">
+                  <Typography component="h2" variant="h5" className="login-title">
+                    Admin Sign In
+                  </Typography>
+                  {error && (
+                    <Alert severity="error" sx={{ mt: 2, width: '100%' }} role="alert">
+                      {error}
+                    </Alert>
+                  )}
+                  <Box
+                    component="form"
+                    onSubmit={formik.handleSubmit}
+                    className="login-form"
+                    noValidate
+                  >
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Username"
+                      name="email"
+                      autoComplete="username"
+                      autoFocus
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      error={formik.touched.email && Boolean(formik.errors.email)}
+                      helperText={formik.touched.email && formik.errors.email}
+                      aria-required="true"
+                    />
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      error={formik.touched.password && Boolean(formik.errors.password)}
+                      helperText={formik.touched.password && formik.errors.password}
+                      aria-required="true"
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      className="login-button"
+                    >
+                      Sign In
+                    </Button>
+                  </Box>
+                </Paper>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Card className="feature-card">
-                <CardContent>
-                  <Diversity3Icon color="primary" className="feature-icon" />
-                  <Typography variant="h6" component="h3" gutterBottom>
-                    Inclusive Culture
-                  </Typography>
-                  <Typography variant="body2">
-                    We embrace diversity and create a supportive workplace for everyone.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card className="feature-card">
-                <CardContent>
-                  <WorkIcon color="primary" className="feature-icon" />
-                  <Typography variant="h6" component="h3" gutterBottom>
-                    Impactful Work
-                  </Typography>
-                  <Typography variant="body2">
-                    Your work will contribute to meaningful projects that shape the future of technology.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          </Container>
         </Box>
-      </Container>
+
+        {/* Features Section */}
+        <Box component="section" className="why-join-section" id="about">
+          <Container maxWidth="lg">
+            <Typography variant="h3" component="h2" gutterBottom>
+              Why Join Us?
+            </Typography>
+            <Typography variant="body1" color="text.secondary" paragraph sx={{ maxWidth: '700px', margin: '0 auto 2rem' }}>
+              At Safe Software, we foster a collaborative and innovative environment where employees can thrive and make a real impact.
+            </Typography>
+            <Grid container spacing={4} sx={{ mt: 2 }}>
+              <Grid item xs={12} md={4}>
+                <Card className="feature-card">
+                  <CardContent sx={{ textAlign: 'center' }}>
+                    <BusinessCenterIcon className="feature-icon" />
+                    <Typography variant="h6" component="h3" gutterBottom>
+                      Career Growth
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Engage with diverse projects across IT and ELV systems, from data centers to security, offering vast opportunities for professional development.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Card className="feature-card">
+                  <CardContent sx={{ textAlign: 'center' }}>
+                    <Diversity3Icon className="feature-icon" />
+                    <Typography variant="h6" component="h3" gutterBottom>
+                      Inclusive Culture
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      We embrace diversity and foster a collaborative, supportive environment where every team member's contribution is valued.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Card className="feature-card">
+                  <CardContent sx={{ textAlign: 'center' }}>
+                    <WorkIcon className="feature-icon" />
+                    <Typography variant="h6" component="h3" gutterBottom>
+                      Impactful Work
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Contribute to a leading solutions provider committed to quality and client success, shaping the technological landscape for businesses across India.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      </main>
 
       {/* Footer */}
       <Box component="footer" className="footer">
         <Container maxWidth="lg">
-          <Grid container spacing={4} justifyContent="space-between">
-            <Grid item xs={12} sm={6} md={3}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                Privacy Policy
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={4}>
+              <Typography variant="h6" gutterBottom>
+                Safe Software & Integrated Solutions
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Your trusted partner in IT and ELV systems integration.
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                Terms of Service
+            <Grid item xs={12} sm={4} md={2}>
+              <Typography variant="h6" gutterBottom>Links</Typography>
+              <Link href="#" color="inherit" display="block">Privacy Policy</Link>
+              <Link href="#" color="inherit" display="block">Terms of Service</Link>
+              <Link href="#" color="inherit" display="block">Contact Us</Link>
+            </Grid>
+            <Grid item xs={12} sm={4} md={3}>
+              <Typography variant="h6" gutterBottom>Contact</Typography>
+              <Typography variant="body2" color="text.secondary">
+                123 Tech Avenue, Bangalore, India
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Email: contact@safesoftware.com
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                Contact Us
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                Follow Us
-              </Typography>
+            <Grid item xs={12} sm={4} md={3}>
+              <Typography variant="h6" gutterBottom>Follow Us</Typography>
               <Box>
-                <IconButton aria-label="Twitter">
-                  <TwitterIcon />
-                </IconButton>
-                <IconButton aria-label="LinkedIn">
-                  <LinkedInIcon />
-                </IconButton>
-                <IconButton aria-label="Facebook">
-                  <FacebookIcon />
-                </IconButton>
+                <IconButton aria-label="Twitter" color="inherit"><TwitterIcon /></IconButton>
+                <IconButton aria-label="LinkedIn" color="inherit"><LinkedInIcon /></IconButton>
+                <IconButton aria-label="Facebook" color="inherit"><FacebookIcon /></IconButton>
               </Box>
             </Grid>
           </Grid>
           <Box className="footer-copyright">
             <Typography variant="body2" color="text.secondary" align="center">
-              © {new Date().getFullYear()} Safe Software and Integrated Solutions Pvt. Ltd. All rights reserved.
+              &copy; {new Date().getFullYear()} Safe Software and Integrated Solutions Pvt. Ltd. All rights reserved.
             </Typography>
           </Box>
         </Container>

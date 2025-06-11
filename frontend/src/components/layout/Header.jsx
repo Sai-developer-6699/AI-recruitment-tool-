@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   AppBar,
@@ -11,85 +11,106 @@ import {
   Menu,
   MenuItem,
   Avatar,
+  Stack,
 } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-// Import CSS
-import '../../styles/Header.css';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Header = () => {
-  const navigate = useNavigate();
   const { isAuthenticated, logout, user } = useAuth();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleMenuClose = () => setAnchorEl(null);
 
   const handleLogout = () => {
     logout();
     navigate('/');
-    handleClose();
+    handleMenuClose();
   };
 
   const handleProfile = () => {
     navigate('/admin-dashboard/profile');
-    handleClose();
+    handleMenuClose();
   };
 
   return (
-    <AppBar position="static" color="default" elevation={0}>
-      <Toolbar>
-        <Typography variant="h6" color="inherit" noWrap className="header-title">
-          <RouterLink to="/" className="header-link">
-            Safe Software and Integrated Solutions Pvt. Ltd.
-          </RouterLink>
+    <AppBar position="sticky" color="inherit" elevation={1}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* Logo or Title */}
+        <Typography
+          variant="h6"
+          noWrap
+          component={RouterLink}
+          to="/"
+          sx={{ color: '#0a66c2', fontWeight: 700, textDecoration: 'none' }}
+        >
+          AI Recruitment Portal
         </Typography>
-        
-        <Button color="primary" variant="text" component={RouterLink} to="/#about">About</Button>
-        <Button color="primary" variant="text" component={RouterLink} to="/#services">Services</Button>
-        <Button color="primary" variant="text" component={RouterLink} to="/#careers">Careers</Button>
-        <Button color="primary" variant="text" component={RouterLink} to="/#contact">Contact</Button>
-        
+
+        {/* Navigation Links (only when NOT authenticated) */}
+        {!isAuthenticated && (
+          <Stack direction="row" spacing={2} sx={{ ml: 4 }}>
+            <Button component={RouterLink} to="/#about" color="primary">
+              About
+            </Button>
+            <Button component={RouterLink} to="/#services" color="primary">
+              Services
+            </Button>
+            <Button component={RouterLink} to="/#careers" color="primary">
+              Careers
+            </Button>
+            <Button component={RouterLink} to="/#contact" color="primary">
+              Contact
+            </Button>
+          </Stack>
+        )}
+
+        {/* User Avatar or Auth Links */}
         {isAuthenticated ? (
           <Box>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <Avatar className="user-avatar">
-                {user?.name?.charAt(0) || 'A'}
+            <IconButton onClick={handleMenuOpen} color="primary">
+              <Avatar>
+                {user?.name?.charAt(0).toUpperCase() || <PersonIcon />}
               </Avatar>
             </IconButton>
             <Menu
-              id="menu-appbar"
               anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right',
               }}
-              keepMounted
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
             >
               <MenuItem onClick={handleProfile}>Profile</MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Box>
         ) : (
-          <Button color="primary" variant="contained" component={RouterLink} to="/#upload">Upload Resume</Button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              component={RouterLink}
+              to="/login"
+            >
+              Login
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              component={RouterLink}
+              to="/register"
+            >
+              Register
+            </Button>
+          </Stack>
         )}
       </Toolbar>
     </AppBar>
